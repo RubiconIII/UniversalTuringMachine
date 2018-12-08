@@ -106,19 +106,36 @@ public class UniversalTuringMachine {
      * @param utm
      */
     public static void executeTransitions(Queue<Transition> transitions, UniversalTuringMachine utm){
-        int endState = 0;
+        int transitionState = utm.startState;
+        int head = utm.startState;
 
         int i = 0;
         while (i < transitions.size()){
             Transition t = transitions.remove();
-            System.out.println("(" + t.firstState + ", " + t.firstTapeSymbol +")" + " => (" + t.secondState + ", " + t.secondTapeSymbol + ", " + t.direction + ")" );
 
-            endState = t.secondState;
+            if(head != t.firstState){
+                System.out.println("Error in input");
+            } else {
+                transitionState = t.secondState;
+
+                if (t.direction == 'L') {
+                    head--;
+                }
+                else if(t.direction == 'R'){
+                    head++;
+                }
+
+                if (head == transitionState) {
+                    System.out.println("(" + t.firstState + ", " + t.firstTapeSymbol + ")" + " => (" + t.secondState + ", " + t.secondTapeSymbol + ", " + t.direction + ")");
+                } else {
+                    System.out.println("Error in input");
+                }
+            }
         }
-        if (endState == utm.rejectState){
+        if (head == utm.rejectState){
             System.out.println("Rejected");
         }
-        if (endState == utm.acceptState){
+        if (head == utm.acceptState){
             System.out.println("Accepting");
         }
     }
