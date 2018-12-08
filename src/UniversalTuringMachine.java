@@ -7,8 +7,8 @@ import java.util.Queue;
 public class UniversalTuringMachine {
     int numberOfStates;
     int leftEndMarker;
-    int inputAlphabet;
-    int tapeAlphabet;
+    String inputAlphabet;
+    String tapeAlphabet;
     int blankSymbol;
     int startState;
     int rejectState;
@@ -17,8 +17,8 @@ public class UniversalTuringMachine {
     public UniversalTuringMachine(
             int numberOfStates,
             int leftEndMarker,
-            int inputAlphabet,
-            int tapeAlphabet,
+            String inputAlphabet,
+            String tapeAlphabet,
             int blank,
             int startState,
             int rejectState,
@@ -151,8 +151,8 @@ public class UniversalTuringMachine {
 
         int numStates = machineDefinition[0].length();
         int leftMarker = machineDefinition[1].length();
-        int inputAlphabet = machineDefinition[2].length();
-        int tapeAlphabet = machineDefinition[3].length();
+        String inputAlphabet = "\'" + machineDefinition[2] + "\'";
+        String tapeAlphabet = "\'" +machineDefinition[3] + "\'";
         int blank = machineDefinition[4].length();
         int start = machineDefinition[5].length();
         int reject = machineDefinition[6].length();
