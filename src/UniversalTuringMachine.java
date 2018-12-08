@@ -34,7 +34,7 @@ public class UniversalTuringMachine {
     }
 
     public static void main(String args[]){
-        runUniversalTuringMachineFromFile("Input/input1.txt");
+        runUniversalTuringMachineFromFile("input/input1.txt");
     }
 
     /** Reads from specified input file
