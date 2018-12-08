@@ -80,8 +80,9 @@ public class UniversalTuringMachine {
         String[] transitionDefinition = transitions.split("1");
         Queue<Transition> allTransitions = new LinkedList<>();
 
+        //parse transitions out of transition input
         int i = 0;
-        while ( i < transitionDefinition.length){
+        while ( i < transitionDefinition.length){ //read all of the input regarding transitions
             int firstState = transitionDefinition[i].length();
             i++;
             int firstTapeSymbol = transitionDefinition[i].length();
@@ -91,17 +92,17 @@ public class UniversalTuringMachine {
             int secondTapeSymbol = transitionDefinition[i].length();
             i++;
             char direction;
-            if (transitionDefinition[i].length() == 1){
+            if (transitionDefinition[i].length() == 1){ //parse for left head movement
                 direction = 'L';
-            } else if (transitionDefinition[i].length() == 2){
+            } else if (transitionDefinition[i].length() == 2){ //parse for right head movement
                 direction = 'R';
             } else {
                 direction = 'N';
             }
             i++;
 
-            Transition t = new Transition(firstState, firstTapeSymbol, secondState, secondTapeSymbol, direction);
-            allTransitions.add(t);
+            Transition t = new Transition(firstState, firstTapeSymbol, secondState, secondTapeSymbol, direction); //make a new transition
+            allTransitions.add(t); //store the transition in the queue
         }
         return allTransitions;
     }
@@ -112,37 +113,37 @@ public class UniversalTuringMachine {
      * @param utm
      */
     public static void executeTransitions(Queue<Transition> transitions, UniversalTuringMachine utm){
-        int transitionState = utm.startState;
-        int head = utm.startState;
+        int transitionState;
+        int head = utm.startState; //read head starts at the start state
 
         int i = 0;
-        while (i < transitions.size()){
-            Transition t = transitions.remove();
+        while (i < transitions.size()){ //for all the transitions
+            Transition t = transitions.remove(); //remove the first one
 
-            if(head != t.firstState){
-                System.out.println("Error in input");
+            if(head != t.firstState){ //if the head isn't at the first state
+                System.out.println("Error in input"); //there's a problem
             } else {
-                transitionState = t.secondState;
+                transitionState = t.secondState; //otherwise, the transition state is the second state
 
                 if (t.direction == 'L') {
-                    head--;
+                    head--; //move the head left
                 }
                 else if(t.direction == 'R'){
-                    head++;
+                    head++; //move the head right
                 }
 
-                if (head == transitionState) {
-                    System.out.println("(" + t.firstState + ", " + t.firstTapeSymbol + ")" + " => (" + t.secondState + ", " + t.secondTapeSymbol + ", " + t.direction + ")");
+                if (head == transitionState) { //make sure the head moves as expected
+                    System.out.println("(" + t.firstState + ", " + t.firstTapeSymbol + ")" + " => (" + t.secondState + ", " + t.secondTapeSymbol + ", " + t.direction + ")"); //print out the transition
                 } else {
-                    System.out.println("Error in input");
+                    System.out.println("Error in input"); //otherwise, there's a problem with the instructions.
                 }
             }
         }
         if (head == utm.rejectState){
-            System.out.println("Rejected");
+            System.out.println("Rejected"); //machine rejects if the head ends in the reject state
         }
         if (head == utm.acceptState){
-            System.out.println("Accepting");
+            System.out.println("Accepting"); //machine is accepting if the head ends in the accept state
         }
     }
 
@@ -155,6 +156,7 @@ public class UniversalTuringMachine {
 
         String[] machineDefinition = machineInfoInput.split("1");
 
+        //parse all of the machine definition input
         int numStates = machineDefinition[0].length();
         int leftMarker = machineDefinition[1].length();
         String inputAlphabet = "\'" + machineDefinition[2] + "\'";
