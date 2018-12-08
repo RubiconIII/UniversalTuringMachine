@@ -1,7 +1,13 @@
+/** This is an attempt to create a Universal Turing Machine
+ * Based on input discussed in Theory of Computation course
+ *
+ * @author Curtis P. Hohl
+ * @date 12/8/2018
+ */
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class UniversalTuringMachine {
